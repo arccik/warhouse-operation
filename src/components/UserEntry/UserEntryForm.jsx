@@ -1,8 +1,8 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Formik } from "formik";
-import { useAddUserEntryMutation } from "@/services/User/userSlice";
-import Loader from "../utils/Loader/Loader";
+import { useAddUserEntryMutation } from "@/features/User/userSlice";
+import Loader from "../resources/Loader/Loader";
 import { useRouter } from "next/router";
 import Snackbar from "@mui/material/Snackbar";
 import styles from "./previewTableStyles.module.css";

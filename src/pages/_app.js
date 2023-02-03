@@ -1,14 +1,20 @@
 import '@/styles/globals.css'
 import { Provider } from "react-redux";
-import { store } from "../services/store";
-import AppContainer from "../components/AppContainer/ApplicationContainer";
+import { store } from "../features/store";
+// import AppContainer from "../components/AppContainer/ApplicationContainer";
+import { SessionProvider } from "next-auth/react";
 
-export default function App({ Component, pageProps }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
-    <Provider store={store}>
-      <AppContainer>
+    <SessionProvider session={session}>
+      <Provider store={store}>
+        {/* <AppContainer> */}
         <Component {...pageProps} />
-      </AppContainer>
-    </Provider>
+        {/* </AppContainer> */}
+      </Provider>
+    </SessionProvider>
   );
 }

@@ -1,5 +1,5 @@
 import UserEntry from "../../models/userEntry-model";
-import dbConnect from "@/lib/dbConnect";
+import dbConnect from "@/utils/dbConnect";
 
 export default async function handler(req, res) {
   try {
