@@ -3,7 +3,7 @@ import dbConnect from "@/utils/dbConnect";
 
 export default async function handler(req, res) {
   try {
-    await dbConnect();
+    dbConnect();
     const body = req.body;
     if (
       body.storageUnit &&

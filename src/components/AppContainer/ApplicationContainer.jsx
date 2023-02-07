@@ -9,16 +9,17 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-import AppFooter from "./AppFooter/AppFooter";
+import AppFooter from "./AppFooter";
 import { useState } from "react";
 import { Drawer } from "./Drawer";
 import { DrawerHeader } from "./DrawerHeader";
 import { AppBar } from "./AppBar";
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 export const drawerWidth = 240;
 
-export default function MiniDrawer({ children }) {
-  const [open, setOpen] = useState(false);
+export default function AppContainer({ children }) {
+  const [open, setOpen] = useLocalStorage('drawer', false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -32,7 +33,7 @@ export default function MiniDrawer({ children }) {
     <>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="fixed" open={open} color="transparent">
+        <AppBar position="fixed" open={open}>
           <Toolbar>
             <IconButton
               color="inherit"

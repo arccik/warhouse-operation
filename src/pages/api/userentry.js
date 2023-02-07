@@ -3,7 +3,7 @@ import dbConnect from "@/utils/dbConnect";
 
 export default async function handler(req, res) {
   try {
-    await dbConnect();
+    dbConnect();
     const result = await UserEntry.find({});
     return res.status(200).json({ data: result, message: "Status ok" });
   } catch (error) {

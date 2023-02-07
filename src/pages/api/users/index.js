@@ -4,7 +4,7 @@ import userService from "../../../services/user-service";
 
 export default async function handler(req, res) {
   try {
-    await dbConnect();
+    dbConnect();
     const { email, password } = req.body;
     const user = await userService.login(email, password);
     console.log("user registre : ", user);

@@ -15,6 +15,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import SettingsIcon from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
 
 export function MenuListItems({ index, open }) {
   const menuItemsTop = [
@@ -24,24 +25,29 @@ export function MenuListItems({ index, open }) {
       link: "/",
     },
     {
-      label: "Orders",
+      label: "Item Receipt",
       icon: <AddShoppingCartIcon />,
-      link: "/orders",
+      link: "/items-receipt",
     },
     {
-      label: "Goods in",
+      label: "Check In",
       icon: <AddBusinessIcon />,
-      link: "/goodsin",
+      link: "/check-in",
     },
     {
-      label: "Lines",
+      label: "Pick Order",
       icon: <AirlineSeatReclineNormalIcon />,
-      link: "/lines",
+      link: "/pick-order",
     },
     {
       label: "Dispatch",
       icon: <AssignmentTurnedInIcon />,
       link: "/dispatch",
+    },
+    {
+      label: "Products",
+      icon: <AssignmentTurnedInIcon />,
+      link: "/add/product",
     },
   ];
 
@@ -53,6 +59,11 @@ export function MenuListItems({ index, open }) {
       link: "/activities",
     },
     { label: "Settings", icon: <SettingsIcon />, link: "/settings" },
+    {
+      label: "Sign Out",
+      icon: <Logout sx={{ color: 'red' }} />,
+      link: "/api/auth/signout",
+    },
   ];
 
   return (

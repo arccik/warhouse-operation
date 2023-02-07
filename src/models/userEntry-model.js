@@ -10,4 +10,4 @@ const userEntry = new Schema(
   { timestamps: true }
 );
 
-export default models.UserEntry || model("UserEntry", userEntry);
+export default models["UserEntry"] || model("UserEntry", userEntry);

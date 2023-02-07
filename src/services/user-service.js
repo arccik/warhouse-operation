@@ -22,7 +22,10 @@ class UserService {
     return { ...tokens, user: { email, id: user._id } };
   }
   async login(email, password) {
+    const users = await User.find();
+    console.log("Trying to login ...... >>>>", users);
     const user = await User.findOne({ email });
+
     if (!user) {
       return { error: "User with given email not found" };
     }

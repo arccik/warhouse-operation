@@ -37,7 +37,7 @@ export default function LoginForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log("Sign in details : ", data);
+    console.log("Sign in details : ", data.get("password"));
     const res = await signIn("credentials", {
       email: data.get("email"),
       password: data.get("password"),

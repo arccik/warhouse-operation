@@ -1,8 +1,8 @@
 import '@/styles/globals.css'
 import { Provider } from "react-redux";
 import { store } from "../features/store";
-// import AppContainer from "../components/AppContainer/ApplicationContainer";
 import { SessionProvider } from "next-auth/react";
+import { SnackbarProvider } from "notistack";
 
 export default function App({
   Component,
@@ -10,11 +10,11 @@ export default function App({
 }) {
   return (
     <SessionProvider session={session}>
-      <Provider store={store}>
-        {/* <AppContainer> */}
-        <Component {...pageProps} />
-        {/* </AppContainer> */}
-      </Provider>
+      <SnackbarProvider maxSnack={5}>
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
+      </SnackbarProvider>
     </SessionProvider>
   );
 }
