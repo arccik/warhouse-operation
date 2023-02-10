@@ -2,16 +2,16 @@ import { Schema, model, models } from "mongoose";
 
 const ProductSchema = new Schema(
   {
-    productId: String,
-    storageUnit: String,
-    material: String,
-    materialDescription: String,
+    ProductId: String,
+    StorageUnit: String,
+    Material: String,
+    "Material Description": String,
     SLOC: String,
-    specialStock: Boolean,
-    specialStockNumber: String,
-    type: String,
-    availableStock: Number,
-    storageBin: String,
+    "Special Stock": Boolean,
+    "Special Stock Number": String,
+    Type: String,
+    "Available Stock": Number,
+    StorageBin: String,
   },
   { timestamps: true }
 );

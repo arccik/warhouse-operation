@@ -18,7 +18,11 @@ const userSchema = new Schema(
         "Please fill a valid email address",
       ],
     },
+    firstName: String,
+    lastName: String,
+    department: String,
     activationLink: String,
+    role: { type: String, default: "user", enum: ["user", "counter", "admin"] },
   },
   { timestamps: true }
 );

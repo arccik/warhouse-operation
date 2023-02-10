@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { signIn } from "next-auth/react";
+import { useSnackbar } from "notistack";
+import { useState } from "react";
 
 function Copyright(props) {
   return (
@@ -34,16 +36,21 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function LoginForm() {
+  const [errors, setErrors] = useState(null);
+  const { enqueueSnackbar } = useSnackbar();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log("Sign in details : ", data.get("password"));
     const res = await signIn("credentials", {
       email: data.get("email"),
       password: data.get("password"),
       redirect: false,
     });
-    console.log("Login response: ", res);
+    if (res.error) {
+      setErrors(res.error);
+      enqueueSnackbar(res.error, { variant: "error" });
+    }
   };
 
   return (
@@ -97,6 +104,7 @@ export default function LoginForm() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                error={errors}
               />
               <TextField
                 margin="normal"
@@ -107,6 +115,8 @@ export default function LoginForm() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                error={errors}
+                helperText={errors}
               />
               {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}

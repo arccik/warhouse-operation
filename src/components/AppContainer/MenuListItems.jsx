@@ -7,15 +7,14 @@ import Divider from "@mui/material/Divider";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import AddBusinessIcon from "@mui/icons-material/AddBusiness";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import AirlineSeatReclineNormalIcon from "@mui/icons-material/AirlineSeatReclineNormal";
-import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import HomeIcon from "@mui/icons-material/Home";
 import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import PublishIcon from "@mui/icons-material/Publish";
+import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
 
 export function MenuListItems({ index, open }) {
   const menuItemsTop = [
@@ -25,43 +24,33 @@ export function MenuListItems({ index, open }) {
       link: "/",
     },
     {
-      label: "Item Receipt",
-      icon: <AddShoppingCartIcon />,
-      link: "/items-receipt",
+      label: "Import Data",
+      icon: <PublishIcon />,
+      link: "/import-data",
     },
     {
-      label: "Check In",
-      icon: <AddBusinessIcon />,
+      label: "Inventory",
+      icon: <InventoryIcon />,
       link: "/check-in",
     },
+
     {
-      label: "Pick Order",
-      icon: <AirlineSeatReclineNormalIcon />,
-      link: "/pick-order",
-    },
-    {
-      label: "Dispatch",
-      icon: <AssignmentTurnedInIcon />,
-      link: "/dispatch",
-    },
-    {
-      label: "Products",
-      icon: <AssignmentTurnedInIcon />,
-      link: "/add/product",
+      label: "Scan Products",
+      icon: <QrCodeScannerIcon />,
+      link: "/add/items",
     },
   ];
 
   const menuItemLower = [
-    { label: "Management", icon: <DisplaySettingsIcon />, link: "/management" },
     {
-      label: "User Activities",
-      icon: <VolunteerActivismIcon />,
-      link: "/activities",
+      label: "User Management",
+      icon: <DisplaySettingsIcon />,
+      link: "/user-management",
     },
-    { label: "Settings", icon: <SettingsIcon />, link: "/settings" },
+
     {
       label: "Sign Out",
-      icon: <Logout sx={{ color: 'red' }} />,
+      icon: <Logout sx={{ color: "red" }} />,
       link: "/api/auth/signout",
     },
   ];
@@ -113,6 +102,7 @@ export function MenuListItems({ index, open }) {
             disablePadding
             sx={{
               display: "block",
+              bottom: 0,
             }}
             component={Link}
             href={link}

@@ -5,13 +5,10 @@ import userService from "../../../services/user-service";
 export default async function handler(req, res) {
   try {
     dbConnect();
-    const { email, password } = req.body;
-    const user = await userService.login(email, password);
-    console.log("user registre : ", user);
-    if (user.error) return res.status(401).json({ message: user.error });
-    return res
-      .status(200)
-      .json({ status: "ok", message: "User Succesfully login" });
+    const users = await userService.getAllUsers();
+    if (!users)
+      return res.status(401).json({ message: "Problem to get users" });
+    return res.status(200).json(users);
   } catch (error) {
     return res
       .status(403)

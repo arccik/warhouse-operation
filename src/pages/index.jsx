@@ -5,6 +5,21 @@ import { useEffect } from "react";
 import AppContainer from "@/components/AppContainer/ApplicationContainer";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import CircleChart from "@/components/Charts/CircleChart";
+import { Typography } from "@mui/material";
+import { LineChart } from "@/components/Charts/LineChart";
+
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 
 const HomePage = () => {
   const { status, data } = useSession();
@@ -12,27 +27,29 @@ const HomePage = () => {
     if (!(status === "authenticated")) Router.replace("/auth/signin");
   }, [status]);
   if (status === "loading") return <Loader />;
-  console.log("Loading... ", status);
+
   return (
     <AppContainer>
-      <h1>HEllO {data.user.email.split("@")[0].toUpperCase()}</h1>
-      <Box
-        component="span"
-        sx={{
-          m: 3,
-          p: 4,
-          // border: "1px solid grey",
-          borderRadius: 20,
-          boxShadow:
-            " rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;",
-          '&:hover': {
-            boxShadow:
-            " rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 10px 0px 10px 0px;"
-          }
-        }}
-      >
-        <Button>Save</Button>
-      </Box>
+      <Typography variant="h3" component="h2">
+        Inventory Analytics
+      </Typography>
+      <Grid container spacing={4} mt={3}>
+        <Grid item xs={12} md={4}>
+          <Item>
+            <CircleChart />
+          </Item>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Item>
+            <LineChart />
+          </Item>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Item>
+            <CircleChart />
+          </Item>
+        </Grid>
+      </Grid>
     </AppContainer>
   );
 };

@@ -15,11 +15,37 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: (result, error, args) => {
+        console.log("add tags ", { result });
+
+        return [{ type: "Product", _id: "LIST" }];
+      },
+    }),
+    addManyProducts: builder.mutation({
+      query: (data) => ({
+        url: "/products/addmany",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ({ data }, error, args) => {
+        console.log("add tags ", data);
+        return [{ type: "Product", _id: "LIST" }];
+      },
     }),
     getProducts: builder.query({
       query: () => "/products/get",
+      providesTags: (result, error, args) => {
+        if (!result) return [{ type: "Product", _id: "LIST" }];
+        else {
+          return [...result.map(({ _id }) => ({ type: "Product", _id }))];
+        }
+      },
     }),
   }),
 });
 
-export const { useGetProductsQuery, useAddProductMutation } = extendedApiSlice;
+export const {
+  useGetProductsQuery,
+  useAddProductMutation,
+  useAddManyProductsMutation,
+} = extendedApiSlice;

@@ -21,5 +21,9 @@ class ProductService {
     const product = await Product.create(data);
     return product;
   }
+  async addMany(data) {
+    const products = await Product.insertMany(data);
+    return products;
+  }
 }
 export default new ProductService();

@@ -14,7 +14,7 @@ const CheckIn = () => {
     <AppContainer>
       <Box>
         <Typography variant="h1" component="h2">
-          Check in Goods
+          Inventory
         </Typography>
         {/* <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 10 }}>
           <Button variant="contained" component="label">

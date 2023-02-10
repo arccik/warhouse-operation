@@ -4,23 +4,23 @@ import { check, validationResult } from "express-validator";
 import productService from "@/services/product-service";
 import dbConnect from "@/utils/dbConnect";
 
-const validateBody = initMiddleware(
-  validateMiddleware(
-    [
-      check("productId").isString().not().isEmpty(),
-      check("storageUnit").isString().not().isEmpty(),
-      check("material").isString().not().isEmpty(),
-      check("materialDescription").isString().not().isEmpty(),
-      check("SLOC").isString().not().isEmpty(),
-      check("specialStock").isBoolean().not().isEmpty(),
-      check("specialStockNumber").isString().not().isEmpty(),
-      check("type").isString().not().isEmpty(),
-      check("availableStock").isNumeric().not().isEmpty(),
-      check("storageBin").isString().not().isEmpty(),
-    ],
-    validationResult
-  )
-);
+// const validateBody = initMiddleware(
+//   validateMiddleware(
+//     [
+//       check("productId").isString().not().isEmpty(),
+//       check("storageUnit").isString().not().isEmpty(),
+//       check("material").isString().not().isEmpty(),
+//       check("materialDescription").isString().not().isEmpty(),
+//       check("SLOC").isString().not().isEmpty(),
+//       check("specialStock").isBoolean().not().isEmpty(),
+//       check("specialStockNumber").isString().not().isEmpty(),
+//       check("type").isString().not().isEmpty(),
+//       check("availableStock").isNumeric().not().isEmpty(),
+//       check("storageBin").isString().not().isEmpty(),
+//     ],
+//     validationResult
+//   )
+// );
 
 export default async (req, res) => {
   dbConnect();
