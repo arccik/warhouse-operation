@@ -5,50 +5,57 @@ import { check, validationResult } from "express-validator";
 import dbConnect from "@/utils/dbConnect";
 import mainTableService from "@/services/mainTable-service";
 import Item from "@/models/item-model";
+import MapProduct from "@/models/map-product-model";
+import Product from "@/models/product-model";
 
 export default async (req, res) => {
   dbConnect();
   switch (req.method) {
-    case "POST":
-      const body = req.body;
-      const data = await mainTableService.add({
-        storageUnit: body.storageUnit,
-        materialCodeScanned: Number,
-        materialCodeSAP: Number,
-        description: String,
-        stockCategory: String,
-        specialStoreNumber: String,
-        countedQuantity: Number,
-        scannedLocation: String,
-        timeAndDateOfScanning: Date,
-        SAPQuantity: Number,
-        SAPAddress: String,
-        customers: String,
-        difference: Number,
-        MAP: String,
-        value: Number,
-        action: String,
-        status: Boolean,
-        corrections: Boolean,
-        result: String,
-        comment: String,
-        ccUser: String,
-        mistake: Boolean,
-        mistakeUsername: String,
-        round: Number,
-      });
-      res.status(200).json(data);
-      break;
     case "GET":
       try {
         const items = await Item.find({ submitted: false }).select("-_id -__v");
 
-        const result = await mainTableService.addMany(items);
+        const readyRowsForMainBD = await items.forEach(async (item) => {
+          const mapProductDetails = await MapProduct.findOne({
+            Material: item.materialCodeScanned,
+          });
+          const productDetails = await Product.findOne({
+            Material: item.materialCodeScanned,
+            StorageBin: item.stockLocation,
+            storageUnit: item.storageUnit,
+          });
+          // console.log("REady ROws to send : ", {
+          //   mapProductDetails,
+          //   productDetails,
+          // });
+          const response = await mainTableService.add({
+            storageUnit: item.storageUnit,
+            materialCodeScanned: item.materialCodeScanned,
+            materialCodeSAP: mapProductDetails.Material,
+            description: mapProductDetails.Description,
+            stockCategory: item.specialStock,
+            specialStoreNumber: item.specialStoreNumber,
+            countedQuantity: item.countedQuantity,
+            scannedLocation: item.scannedLocation,
+            timeAndDateOfScanning: item.createdAt,
+            SAPQuantity: productDetails ? productDetails["Available Stock"] : 0,
+            SAPAddress: productDetails
+              ? productDetails["Storage Unit"]
+              : item.storageUnit,
+            customers: mapProductDetails["Prod Hierarchy Desc"],
+            difference: -100,
+            MAP: mapProductDetails.MAP,
+            value: Number(item.countedQuantity) * mapProductDetails.MAP,
+            scannedBy: item.scannedBy,
+          });
+          console.log("readyRowsForMainBD", response);
+        });
+
         await Item.updateMany(
           { submitted: false },
           { $set: { submitted: true } }
         );
-        res.status(200).json(result);
+        res.status(200).json({ message: "test" });
         break;
       } catch (error) {
         console.log("Error on main Table", error);

@@ -31,11 +31,11 @@ const Upload = () => {
     setLoading(true);
     const jsonData = xlsx.utils.sheet_to_json(sheets[sheet]);
     console.log("jsonData ", jsonData);
-    // for (let i = 0; i < jsonData.length; i += 100) {
-    //   setTimeout(() => {
-    //     const response = saveToDatabase(jsonData.slice(i, i + 100));
-    //   }, 1000);
-    // }
+    for (let i = 0; i < jsonData.length; i += 100) {
+      setTimeout(() => {
+        const response = saveToDatabase(jsonData.slice(i, i + 100));
+      }, 1000);
+    }
     setLoading(false);
     setCompleted(true);
   };
@@ -76,7 +76,7 @@ const Upload = () => {
       ) : (
         <>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <h3>Upload File: </h3>
+            <h3>Upload Product File (LX02_Query): </h3>
             <Button variant="contained" component="label">
               Upload Excel File
               <input

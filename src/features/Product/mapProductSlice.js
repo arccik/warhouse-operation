@@ -17,8 +17,9 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, args) => {
         console.log("add tags ", { result });
-
-        return [{ type: "MapProduct", _id: "LIST" }];
+        return result
+          ? result.map(({ _id }) => [{ type: "MapProduct", _id }])
+          : [{ type: "MapProduct", _id: "LIST" }];
       },
     }),
     addManyMapProducts: builder.mutation({
@@ -27,9 +28,10 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ({ data }, error, args) => {
-        console.log("add tags ", data);
-        return [{ type: "MapProduct", _id: "LIST" }];
+      invalidatesTags: (result, error, args) => {
+        return result
+          ? result.map(({ _id }) => [{ type: "MapProduct", _id }])
+          : [{ type: "MapProduct", _id: "LIST" }];
       },
     }),
     getAllMapProducts: builder.query({

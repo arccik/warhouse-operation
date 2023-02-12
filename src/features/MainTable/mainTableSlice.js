@@ -14,18 +14,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         url: `/maintable`,
         method: "GET",
       }),
-      providesTags: (result, error, arg) =>
-        result
-          ? [
-              ...result.map(({ scannedBy }) => ({
-                type: "Item",
-                _id: scannedBy,
-              })),
-              "Item",
-            ]
-          : [{ type: "Item", _id: "LIST" }],
-
-      // transformResponse: (response, meta, arg) => response.data,
+      invalidatesTags: () => [{ type: "Item", _id: "LIST" }],
     }),
   }),
 });

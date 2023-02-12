@@ -7,19 +7,11 @@ import ErrorHandler from "../resources/ErrorHandler/ErrorHandler";
 import Loader from "../resources/Loader/Loader";
 import dayjs from "dayjs";
 import TableActions from "./TableActions";
-import { useSubmitDataMutation } from "@/features/MainTable/mainTableSlice";
 
 const RecentScannedItems = () => {
   const [page, setPage] = useState(10);
   const [rowId, setRowId] = useState(null);
   const { data: rows, isLoading, error } = useGetRecentScannedItemsQuery();
-  const [submitData, {}] = useSubmitDataMutation();
-
-  const handleSubmit = async () => {
-    const response = await submitData();
-    console.log("Submitted: ", response);
-  };
-
   const columns = useMemo(
     () => [
       {
@@ -116,14 +108,6 @@ const RecentScannedItems = () => {
         onPageSizeChange={(newPageSize) => setPage(newPageSize)}
         onCellEditCommit={(params) => setRowId(params.id)}
       />
-      <Button
-        onClick={handleSubmit}
-        color="primary"
-        variant="contained"
-        fullWidth
-      >
-        Submit
-      </Button>
     </Box>
   );
 };

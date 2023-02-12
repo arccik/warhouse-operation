@@ -5,7 +5,7 @@ const MapProductSchema = new Schema(
     Material: String,
     Description: String,
     "Prod Hierarchy Desc": String,
-    MAP: Types.Decimal128,
+    MAP: Number,
   },
   { timestamps: true }
 );

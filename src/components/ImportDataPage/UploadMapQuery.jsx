@@ -75,7 +75,7 @@ const UploadMapQuery = () => {
       ) : (
         <>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <h3>Upload Map Product spreadsheet File: </h3>
+            <h3>Upload Map Product File (MAP_Query) </h3>
             <Button variant="contained" component="label">
               Upload
               <input
