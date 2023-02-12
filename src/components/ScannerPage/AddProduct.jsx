@@ -3,7 +3,7 @@ import { Formik, Form } from "formik";
 import TextField from "@mui/material/TextField";
 import { Box, Button, FormControlLabel } from "@mui/material";
 import { useAddProductMutation } from "@/features/Product/productSlice";
-import PreSubmitTable from "./PreSubmitTable";
+// import PreSubmitTable from "./PreSubmitTable";
 import Checkbox from "@mui/material/Checkbox";
 
 const AddProduct = () => {
@@ -75,7 +75,7 @@ const AddProduct = () => {
           )}
         </Formik>
       </Box>
-      <PreSubmitTable />
+      {/* <PreSubmitTable /> */}
     </>
   );
 };

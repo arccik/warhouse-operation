@@ -15,7 +15,7 @@ export default function DataGridTable() {
         loading={isLoading}
         rows={rows}
         columns={columns}
-        // autoPageSize={true}
+        autoPageSize
         rowHeight={60}
         getRowId={(v) => v._id}
         // pageSize={5}

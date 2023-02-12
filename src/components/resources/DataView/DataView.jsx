@@ -7,8 +7,8 @@ export default function DataGridDemo({ rows, columns }) {
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={5}
         autoPageSize
+        pageSize={10}
         autoHeight
         disableSelectionOnClick
         getRowId={(v) => v._id}

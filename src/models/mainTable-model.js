@@ -2,9 +2,9 @@ import { Schema, model, models } from "mongoose";
 
 const dataSchema = new Schema(
   {
-    storageUnit: Number,
-    materialCodeScanned: Number,
-    materialCodeSAP: Number,
+    storageUnit: String,
+    materialCodeScanned: String,
+    materialCodeSAP: String,
     description: String,
     stockCategory: String,
     specialStoreNumber: String,
@@ -26,8 +26,9 @@ const dataSchema = new Schema(
     mistake: Boolean,
     mistakeUsername: String,
     round: Number,
+    scannedBy: { type: Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );
 
-export default models["Data"] || model("Data", dataSchema);
+export default models["MainTable"] || model("MainTable", dataSchema);

@@ -16,7 +16,14 @@ const CheckIn = () => {
         <Typography variant="h1" component="h2">
           Inventory
         </Typography>
-        {/* <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 10 }}>
+        <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 10 }}>
+          <Button variant="contained" component="label">
+            Add Records
+          </Button>
+          <Button variant="contained" component="label">
+            Add Records
+          </Button>
+
           <Button variant="contained" component="label">
             Add Records
           </Button>
@@ -27,20 +34,7 @@ const CheckIn = () => {
           >
             <PhotoCamera />
           </IconButton>
-          <Button variant="contained" component="label">
-            Check in
-          </Button>
-          <IconButton
-            color="primary"
-            aria-label="upload picture"
-            component="label"
-          >
-            <PhotoCamera />
-          </IconButton>
-          <Button variant="contained" component="label">
-            Delete
-          </Button>
-        </Stack> */}
+        </Stack>
       </Box>
       <DataGridTable />
     </AppContainer>

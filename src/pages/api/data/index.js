@@ -1,5 +1,5 @@
 import dbConnect from "@/utils/dbConnect";
-import DataModel from "../../../models/data-model";
+import DataModel from "../../../models/mainTable-model";
 
 export default async function handler(req, res) {
   try {

@@ -31,7 +31,7 @@ export function MenuListItems({ index, open }) {
     {
       label: "Inventory",
       icon: <InventoryIcon />,
-      link: "/check-in",
+      link: "/inventory",
     },
 
     {

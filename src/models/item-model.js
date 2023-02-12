@@ -2,13 +2,16 @@ import { Schema, models, model } from "mongoose";
 
 const ItemSchema = new Schema(
   {
-    itemId: String,
-    stockLocation: String,
-    storageUnit: String,
-    specialStock: Boolean,
-    specialStoreNumber: String,
-    quantity: Number,
-    scannedBy: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    itemId: { type: String },
+    stockLocation: { type: String },
+    storageUnit: { type: String },
+    materialCodeScanned: { type: String },
+    specialStock: { type: Boolean },
+    specialStoreNumber: { type: String },
+    countedQuantity: { type: Number },
+    scannedBy: { type: Schema.Types.ObjectId, ref: "User" },
+    submitted: { type: Boolean, default: false },
+    countedQuantity: { type: Number },
   },
   { timestamps: true }
 );

@@ -1,13 +1,12 @@
 import Loader from "@/components/resources/Loader/Loader";
-import { useAddManyProductsMutation } from "@/features/Product/productSlice";
-import { Button, Typography, Stack, IconButton, Alert } from "@mui/material";
+import { useAddManyMapProductsMutation } from "@/features/Product/mapProductSlice";
+import { Button, Typography, Stack, Alert } from "@mui/material";
 import { useState } from "react";
 import * as xlsx from "xlsx/xlsx.mjs";
 
-const Upload = () => {
-  const [saveToDatabase, actions] = useAddManyProductsMutation();
+const UploadMapQuery = () => {
+  const [addMapProductsToDB, actions] = useAddManyMapProductsMutation();
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState(null);
   const [sheets, setSheets] = useState("");
   const [completed, setCompleted] = useState(false);
 
@@ -31,11 +30,12 @@ const Upload = () => {
     setLoading(true);
     const jsonData = xlsx.utils.sheet_to_json(sheets[sheet]);
     console.log("jsonData ", jsonData);
-    // for (let i = 0; i < jsonData.length; i += 100) {
-    //   setTimeout(() => {
-    //     const response = saveToDatabase(jsonData.slice(i, i + 100));
-    //   }, 1000);
-    // }
+    for (let i = 0; i < jsonData.length; i += 100) {
+      setTimeout(() => {
+        const response = addMapProductsToDB(jsonData.slice(i, i + 100));
+        console.log("AddIng map product RESPONSE: ", response);
+      }, 1000);
+    }
     setLoading(false);
     setCompleted(true);
   };
@@ -64,7 +64,6 @@ const Upload = () => {
           ))}
           <Button
             onClick={() => {
-              setData(null);
               setSheets(null);
             }}
             sx={{ position: "absolute", right: 0 }}
@@ -76,9 +75,9 @@ const Upload = () => {
       ) : (
         <>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <h3>Upload File: </h3>
+            <h3>Upload Map Product spreadsheet File: </h3>
             <Button variant="contained" component="label">
-              Upload Excel File
+              Upload
               <input
                 hidden
                 accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -92,4 +91,4 @@ const Upload = () => {
     </form>
   );
 };
-export default Upload;
+export default UploadMapQuery;

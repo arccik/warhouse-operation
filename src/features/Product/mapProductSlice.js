@@ -1,17 +1,17 @@
 import { createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../apiSlice";
 
-const productAdapter = createEntityAdapter({
+const mapProductAdapter = createEntityAdapter({
   selectId: (e) => e._id,
 });
 
-const initialState = productAdapter.getInitialState();
+const initialState = mapProductAdapter.getInitialState();
 
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    addProduct: builder.mutation({
+    addMapProduct: builder.mutation({
       query: (data) => ({
-        url: "/products/add",
+        url: "/map-products/add",
         method: "POST",
         body: data,
       }),
@@ -21,9 +21,9 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return [{ type: "MapProduct", _id: "LIST" }];
       },
     }),
-    addManyProducts: builder.mutation({
+    addManyMapProducts: builder.mutation({
       query: (data) => ({
-        url: "/products/addmany",
+        url: "/map-products/add?many=true",
         method: "POST",
         body: data,
       }),
@@ -32,8 +32,17 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return [{ type: "MapProduct", _id: "LIST" }];
       },
     }),
-    getProducts: builder.query({
-      query: () => "/products/get",
+    getAllMapProducts: builder.query({
+      query: () => "/map-products/get",
+      providesTags: (result, error, args) => {
+        if (!result) return [{ type: "MapProduct", _id: "LIST" }];
+        else {
+          return [...result.map(({ _id }) => ({ type: "Product", _id }))];
+        }
+      },
+    }),
+    getOneMapProduct: builder.query({
+      query: (id) => "/map-products/get",
       providesTags: (result, error, args) => {
         if (!result) return [{ type: "MapProduct", _id: "LIST" }];
         else {
@@ -45,7 +54,8 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetProductsQuery,
-  useAddProductMutation,
-  useAddManyProductsMutation,
+  useAddManyMapProductsMutation,
+  useAddMapProductMutation,
+  useGetAllMapProductsQuery,
+  useGetOneMapProductQuery,
 } = extendedApiSlice;

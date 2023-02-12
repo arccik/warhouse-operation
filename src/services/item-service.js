@@ -9,6 +9,10 @@ class ItemService {
     const items = await Item.find();
     return items;
   }
+  async getRecent() {
+    const items = await Item.find({ submitted: false }).sort({ createdAt: -1 });
+    return items;
+  }
   async add(data) {
     const item = await Item.create(data);
     return item;

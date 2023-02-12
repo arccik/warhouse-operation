@@ -10,7 +10,6 @@ import FormGroup from "@mui/material/FormGroup";
 import { useSnackbar } from "notistack";
 import { useSession } from "next-auth/react";
 
-import { useAddUserMutation } from "@/features/User/userSlice";
 import { useAddItemMutation } from "@/features/Item/itemSlice";
 
 const validationSchema = yup.object({
@@ -21,12 +20,13 @@ const validationSchema = yup.object({
     .string("Scan box or tray barcode where items are stored")
     .required("Storage Unit is required"),
   specialStock: yup.boolean("Tick if this is a specail stock"),
+  materialCodeScanned: yup.string("Enter the Material Code"),
   specialStoreNumber: yup.string(
     "If this stock from external supplier scan barcode"
   ),
-  quantity: yup
+  countedQuantity: yup
     .number("Enter quantity of the items")
-    .required("Role is required"),
+    .required("Quantity is required"),
 });
 
 const AddItems = () => {
@@ -37,19 +37,21 @@ const AddItems = () => {
     initialValues: {
       stockLocation: "",
       storageUnit: "",
+      materialCodeScanned: "",
       specialStock: false,
       specialStoreNumber: "",
-      quantity: 1,
+      countedQuantity: 1,
     },
     validationSchema: validationSchema,
     onSubmit: async (values, actions) => {
       const result = await saveItemToDB({ ...values, scannedBy: data.user.id });
-      console.log(
-        "Result >>>> ",
+      if (result.error) {
         result.error.data.errors.forEach((error) =>
           enqueueSnackbar(`${error.param} - ${error.msg}`, { variant: "error" })
-        )
-      );
+        );
+      } else {
+        formik.resetForm({ values: "" });
+      }
     },
   });
 
@@ -89,17 +91,39 @@ const AddItems = () => {
           }
           helperText={formik.touched.storageUnit && formik.errors.storageUnit}
         />
+        <TextField
+          fullWidth
+          id="materialCodeScanned"
+          name="materialCodeScanned"
+          label="Material Code"
+          value={formik.values.materialCodeScanned}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.materialCodeScanned &&
+            Boolean(formik.errors.materialCodeScanned)
+          }
+          helperText={
+            formik.touched.materialCodeScanned &&
+            formik.errors.materialCodeScanned
+          }
+        />
 
         <TextField
           fullWidth
-          id="quantity"
-          name="quantity"
-          label="quantity"
+          id="countedQuantity"
+          name="countedQuantity"
+          label="Quantity"
           type="number"
-          value={formik.values.quantity}
+          inputMode="numeric"
+          value={formik.values.countedQuantity}
           onChange={formik.handleChange}
-          error={formik.touched.quantity && Boolean(formik.errors.quantity)}
-          helperText={formik.touched.quantity && formik.errors.quantity}
+          error={
+            formik.touched.countedQuantity &&
+            Boolean(formik.errors.countedQuantity)
+          }
+          helperText={
+            formik.touched.countedQuantity && formik.errors.countedQuantity
+          }
         />
 
         <FormGroup>
@@ -121,7 +145,7 @@ const AddItems = () => {
             autoFocus
             id="specialStoreNumber"
             name="specialStoreNumber"
-            label="specialStoreNumber"
+            label="Special Store Number"
             value={formik.values.specialStoreNumber}
             onChange={formik.handleChange}
             error={

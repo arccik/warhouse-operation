@@ -2,7 +2,7 @@ import { Check, Save } from "@mui/icons-material";
 import { blue } from "@mui/material/colors";
 import { useState } from "react";
 
-const { Box, Fab, CircularProgress } = require("@mui/material");
+import { Box, Fab, CircularProgress } from "@mui/material"
 
 const UsersActions = ({ params, rowId, setRowId }) => {
   const [loading, setLoading] = useState(false);
