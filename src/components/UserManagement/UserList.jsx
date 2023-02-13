@@ -58,8 +58,6 @@ const UserList = () => {
   const { data, isLoading, error } = useGetAllUsersQuery();
   if (isLoading) return <Loader />;
   if (error) return <h4>Ops. something went wrong</h4>;
-  console.log("User Get All ", data);
-  // return null;
   return (
     <>
       <Typography variant="h4" mb={4}>

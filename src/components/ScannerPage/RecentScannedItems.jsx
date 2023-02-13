@@ -70,8 +70,8 @@ const RecentScannedItems = () => {
         flex: 1,
       },
       {
-        field: "specialStoreNumber",
-        headerName: "Special Store Number",
+        field: "specialStockNumber",
+        headerName: "Special Stock Number",
         width: 120,
         editable: true,
         flex: 1,

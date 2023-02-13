@@ -10,20 +10,20 @@ const columns = [
   {
     field: "storageUnit",
     headerName: "Storage unit",
-    // width: 150,
+    width: 150,
     editable: false,
   },
   {
     field: "materialCodeScanned",
     headerName: "Material code Scanned",
-    // width: 180,
+    width: 180,
     editable: false,
   },
   {
     field: "materialCodeSAP",
     headerName: "Material code SAP",
     type: "number",
-    width: 150,
+    // width: 150,
     editable: false,
   },
   {
@@ -31,36 +31,37 @@ const columns = [
     headerName: "Description",
     description: "This column has a value getter and is not sortable.",
     sortable: false,
-    // width: 160,
+    width: 160,
     valueGetter: (params) =>
       `${params.row.description || ""} ${params.row.description || ""}`,
   },
   {
     field: "stockCategory",
     headerName: "Stock Category",
-    // width: 150,
+    width: 150,
+    type: "boolean",
     editable: false,
   },
   {
     field: "specialStockNumber",
     headerName: "Special Stock Number",
-    // width: 150,
+    width: 150,
     editable: false,
   },
   {
     field: "countedQuantity",
     headerName: "Counted quantity",
     type: "number",
-    // width: 200,
+    width: 200,
     editable: false,
-    renderCell: (params) => {
-      return (
-        <Slider
-          defaultValue={params.value % 1341}
-          aria-label="Disabled slider"
-        />
-      );
-    },
+    // renderCell: (params) => {
+    //   return (
+    //     <Slider
+    //       defaultValue={params.value % 1341}
+    //       aria-label="Disabled slider"
+    //     />
+    //   );
+    // },
   },
   {
     field: "scannedLocation",

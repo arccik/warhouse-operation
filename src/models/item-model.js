@@ -7,7 +7,7 @@ const ItemSchema = new Schema(
     storageUnit: { type: String },
     materialCodeScanned: { type: String },
     specialStock: { type: Boolean },
-    specialStoreNumber: { type: String },
+    specialStockNumber: { type: String },
     countedQuantity: { type: Number },
     scannedBy: { type: Schema.Types.ObjectId, ref: "User" },
     submitted: { type: Boolean, default: false },

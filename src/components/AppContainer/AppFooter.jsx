@@ -20,12 +20,12 @@ const AppFooter = () => {
         <Grid container direction="column" alignItems="center">
           <Grid item xs={12}>
             <Typography color="black" variant="h5">
-              Estonia Gang
+              Physical Inventory
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography color="textSecondary" variant="subtitle1">
-              {`${new Date().getFullYear()} | NextJS | Material UI | Smart lads`}
+              Privacy Policy | Terms of Service | Copyright Policy
             </Typography>
           </Grid>
         </Grid>

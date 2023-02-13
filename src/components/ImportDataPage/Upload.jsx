@@ -1,11 +1,15 @@
 import Loader from "@/components/resources/Loader/Loader";
-import { useAddManyProductsMutation } from "@/features/Product/productSlice";
+import {
+  useAddManyProductsMutation,
+  useGetProductsQuery,
+} from "@/features/Product/productSlice";
 import { Button, Typography, Stack, IconButton, Alert } from "@mui/material";
 import { useState } from "react";
 import * as xlsx from "xlsx/xlsx.mjs";
 
 const Upload = () => {
   const [saveToDatabase, actions] = useAddManyProductsMutation();
+  const { data: product } = useGetProductsQuery();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   const [sheets, setSheets] = useState("");
@@ -74,20 +78,22 @@ const Upload = () => {
           </Button>
         </>
       ) : (
-        <>
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <h3>Upload Product File (LX02_Query): </h3>
-            <Button variant="contained" component="label">
-              Upload Excel File
-              <input
-                hidden
-                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                type="file"
-                onChange={handleFile}
-              />
-            </Button>
-          </Stack>
-        </>
+        product && (
+          <>
+            <Stack direction="row" alignItems="center" spacing={2}>
+              <h3>Upload Product File (LX02_Query): </h3>
+              <Button variant="contained" component="label">
+                Upload Excel File
+                <input
+                  hidden
+                  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  type="file"
+                  onChange={handleFile}
+                />
+              </Button>
+            </Stack>
+          </>
+        )
       )}
     </form>
   );

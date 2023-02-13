@@ -11,7 +11,7 @@ import AddUser from "@/components/UserManagement/AddUser";
 import UserList from "../../components/UserManagement/UserList";
 
 export default function UsersManagementPage() {
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState("2");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -25,8 +25,8 @@ export default function UsersManagementPage() {
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
               <Tab label="Add New User" value="1" />
-              <Tab label="List All users" value="2" />
-              <Tab label="Activities" value="3" />
+              <Tab label="Users List" value="2" />
+              <Tab label="Users Activities" value="3" />
             </TabList>
           </Box>
           <TabPanel value="1">

@@ -21,7 +21,7 @@ const validationSchema = yup.object({
     .required("Storage Unit is required"),
   specialStock: yup.boolean("Tick if this is a specail stock"),
   materialCodeScanned: yup.string("Enter the Material Code"),
-  specialStoreNumber: yup.string(
+  specialStockNumber: yup.string(
     "If this stock from external supplier scan barcode"
   ),
   countedQuantity: yup
@@ -39,7 +39,7 @@ const AddItems = () => {
       storageUnit: "",
       materialCodeScanned: "",
       specialStock: false,
-      specialStoreNumber: "",
+      specialStockNumber: "",
       countedQuantity: 1,
     },
     validationSchema: validationSchema,
@@ -143,18 +143,18 @@ const AddItems = () => {
           <TextField
             fullWidth
             autoFocus
-            id="specialStoreNumber"
-            name="specialStoreNumber"
-            label="Special Store Number"
-            value={formik.values.specialStoreNumber}
+            id="specialStockNumber"
+            name="specialStockNumber"
+            label="Special Stock Number"
+            value={formik.values.specialStockNumber}
             onChange={formik.handleChange}
             error={
-              formik.touched.specialStoreNumber &&
-              Boolean(formik.errors.specialStoreNumber)
+              formik.touched.specialStockNumber &&
+              Boolean(formik.errors.specialStockNumber)
             }
             helperText={
-              formik.touched.specialStoreNumber &&
-              formik.errors.specialStoreNumber
+              formik.touched.specialStockNumber &&
+              formik.errors.specialStockNumber
             }
           />
         )}

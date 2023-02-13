@@ -7,7 +7,7 @@ const dataSchema = new Schema(
     materialCodeSAP: String,
     description: String,
     stockCategory: String,
-    specialStoreNumber: String,
+    specialStockNumber: String,
     countedQuantity: Number,
     scannedLocation: String,
     timeAndDateOfScanning: Date,

@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     //     materialCodeSAP: randomValue(),
     //     description: randomValue(),
     //     stockCategory: randomValue(),
-    //     specialStoreNumber: randomValue(),
+    //     specialStockNumber: randomValue(),
     //     countedQuantity: Number(randomValue()),
     //     scannedLocation: randomValue(),
     //     timeAndDateOfScanning: new Date(),

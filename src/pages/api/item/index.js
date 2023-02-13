@@ -12,7 +12,7 @@ const validateBody = initMiddleware(
       check("storageUnit").isString().isLength({ min: 1, max: 100 }),
       check("materialCodeScanned").isString().isLength({ min: 1, max: 100 }),
       check("specialStock").isBoolean(),
-      check("specialStoreNumber").isString(),
+      check("specialStockNumber").isString(),
       check("countedQuantity").isNumeric(),
       check("scannedBy").isMongoId(),
     ],
