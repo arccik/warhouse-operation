@@ -1,12 +1,13 @@
 import Slider from "@mui/material/Slider";
+import Checkbox from "@mui/material/Checkbox";
+import IconButton from "@mui/material/IconButton";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import SaveIcon from "@mui/icons-material/Save";
+import dayjs from "dayjs";
+import VerifiedIcon from "@mui/icons-material/Verified";
+import DangerousIcon from "@mui/icons-material/Dangerous";
+
 const columns = [
-  {
-    field: "_id",
-    headerName: "ID",
-    width: 120,
-    sortable: false,
-    filterabel: false,
-  },
   {
     field: "storageUnit",
     headerName: "Storage unit",
@@ -37,10 +38,14 @@ const columns = [
   },
   {
     field: "stockCategory",
-    headerName: "Stock Category",
+    headerName: "Special Stock",
     width: 150,
     type: "boolean",
     editable: false,
+    renderCell: (param) => {
+      console.log("Stock Category : ", param);
+      return <Checkbox disabled checked={param.value == "true"} />;
+    },
   },
   {
     field: "specialStockNumber",
@@ -73,8 +78,9 @@ const columns = [
     field: "timeAndDateOfScanning",
     headerName: "Time and date of scanning",
     type: "number",
-    // width: 200,
+    width: 200,
     editable: false,
+    renderCell: (params) => dayjs(params.value).format("HH:MM:ss DD MMM YY"),
   },
   {
     field: "SAPQuantity",
@@ -84,7 +90,7 @@ const columns = [
     editable: false,
   },
   {
-    field: "SAPAadress",
+    field: "SAPAddress",
     headerName: "SAP Aadress",
     type: "number",
     // width: 200,
@@ -92,7 +98,7 @@ const columns = [
   },
 
   {
-    field: "customer",
+    field: "customers",
     headerName: "Customer",
     // width: 200,
     editable: false,
@@ -108,6 +114,10 @@ const columns = [
     headerName: "Same location",
     // width: 200,
     editable: false,
+    renderCell: (params) =>
+      params.row.scannedLocation === params.row.SAPAddress
+        ? "same"
+        : "wrong location",
   },
   {
     field: "MAP",
@@ -121,22 +131,25 @@ const columns = [
     // width: 200,
     editable: false,
   },
-  {
-    field: "actions",
-    headerName: "Actions",
-    // width: 200,
-    editable: false,
-  },
+
   {
     field: "Status",
     headerName: "Status",
-    // width: 100,
+    width: 60,
     editable: false,
+    sortable: true,
+    renderCell: (params) => {
+      return params.row.difference ? (
+        <DangerousIcon sx={{ color: "red" }} />
+      ) : (
+        <VerifiedIcon sx={{ color: "green" }} />
+      );
+    },
   },
   {
     field: "corrections",
     headerName: "Corrections?",
-    // width: 100,
+    width: 100,
     editable: false,
     type: "boolean",
   },
@@ -153,10 +166,11 @@ const columns = [
     editable: false,
   },
   {
-    field: "CCUser",
+    field: "scannedBy",
     headerName: "CC User",
     // width: 100,
     editable: false,
+    renderCell: (param) => param.value.firstName,
   },
   {
     field: "mistake",
@@ -174,8 +188,34 @@ const columns = [
   {
     field: "round",
     headerName: "Round",
-    // width: 100,
+    width: 100,
     editable: false,
+  },
+  {
+    field: "actions",
+    headerName: "Actions",
+    // width: 200,
+    editable: false,
+    renderCell: (params) => (
+      <>
+        <IconButton
+          color="primary"
+          aria-label="upload picture"
+          component="label"
+        >
+          {/* <input hidden accept="image/*" type="file" /> */}
+          <SaveIcon />
+        </IconButton>
+        <IconButton
+          color="secondary"
+          aria-label="upload picture"
+          component="label"
+        >
+          {/* <input hidden accept="image/*" type="file" /> */}
+          <DeleteForeverIcon />
+        </IconButton>
+      </>
+    ),
   },
 ];
 export default columns;

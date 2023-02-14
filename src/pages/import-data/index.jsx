@@ -1,7 +1,6 @@
 import AppContainer from "@/components/AppContainer/ApplicationContainer";
-import UploadMapQuery from "@/components/ImportDataPage/UploadMapQuery";
+import UploadStepper from "@/components/ImportDataPage/UploadStepper";
 import Typography from "@mui/material/Typography";
-import Upload from "../../components/ImportDataPage/Upload";
 
 const ImportDataPage = () => {
   return (
@@ -10,9 +9,7 @@ const ImportDataPage = () => {
         Import Data
       </Typography>
 
-      <Upload />
-
-      <UploadMapQuery />
+      <UploadStepper />
     </AppContainer>
   );
 };

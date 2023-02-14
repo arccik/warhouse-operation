@@ -7,6 +7,7 @@ import mainTableService from "@/services/mainTable-service";
 import Item from "@/models/item-model";
 import MapProduct from "@/models/map-product-model";
 import Product from "@/models/product-model";
+import mainTableDTO from "@/lib/mainTableDTO";
 
 export default async (req, res) => {
   dbConnect();
@@ -24,51 +25,10 @@ export default async (req, res) => {
             StorageBin: item.stockLocation,
             storageUnit: item.storageUnit,
           });
-          // console.log("REady ROws to send : ", {
-          //   mapProductDetails,
-          //   productDetails,
-          // });
-          if (!mapProductDetails && !productDetails) {
-            mainTableService.add({
-              storageUnit: item.storageUnit,
-              materialCodeScanned: item.materialCodeScanned,
-              stockCategory: item.specialStock,
-              specialStockNumber: item.specialStockNumber,
-              countedQuantity: item.countedQuantity,
-              scannedLocation: item.stockLocation,
-              timeAndDateOfScanning: item.createdAt,
-              difference: item.countedQuantity,
-              scannedBy: item.scannedBy,
-            });
-          } else {
-            const response = await mainTableService.add({
-              storageUnit: item.storageUnit,
-              materialCodeScanned: item.materialCodeScanned,
-              materialCodeSAP: mapProductDetails.Material,
-              description: mapProductDetails.Description,
-              stockCategory: item.specialStock,
-              specialStockNumber: item.specialStockNumber,
-              countedQuantity: item.countedQuantity,
-              scannedLocation: item.stockLocation,
-              timeAndDateOfScanning: item.createdAt,
-              SAPQuantity: productDetails
-                ? productDetails["Available Stock"]
-                : 0,
-              SAPAddress: productDetails
-                ? productDetails["Storage Unit"]
-                : item.storageUnit,
-              customers: mapProductDetails["Prod Hierarchy Desc"],
-              difference: mapProductDetails?.countedQuantity
-                ? mapProductDetails?.countedQuantity - item.countedQuantity
-                : 0,
-              MAP: mapProductDetails?.MAP,
-              value: mapProductDetails?.MAP
-                ? item.countedQuantity * mapProductDetails?.MAP
-                : 0,
-              scannedBy: item.scannedBy,
-            });
-            console.log("readyRowsForMainBD", response);
-          }
+
+           await mainTableService.add(
+             mainTableDTO(item, productDetails, mapProductDetails)
+           );
         });
 
         await Item.updateMany(

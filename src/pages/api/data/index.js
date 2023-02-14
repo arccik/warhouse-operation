@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     //   return res.status(200).json({ data: response, message: "See you data" });
     // }
     if (req.method === "GET") {
-      const data = await DataModel.find();
+      const data = await DataModel.find().populate("scannedBy");
       return res.status(200).json(data);
     }
 

@@ -78,22 +78,20 @@ const Upload = () => {
           </Button>
         </>
       ) : (
-        product && (
-          <>
-            <Stack direction="row" alignItems="center" spacing={2}>
-              <h3>Upload Product File (LX02_Query): </h3>
-              <Button variant="contained" component="label">
-                Upload Excel File
-                <input
-                  hidden
-                  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                  type="file"
-                  onChange={handleFile}
-                />
-              </Button>
-            </Stack>
-          </>
-        )
+        <>
+          <Stack direction="row" alignItems="center" spacing={2}>
+            <h3>Upload Product File (LX02_Query): </h3>
+            <Button variant="contained" component="label">
+              Upload
+              <input
+                hidden
+                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                type="file"
+                onChange={handleFile}
+              />
+            </Button>
+          </Stack>
+        </>
       )}
     </form>
   );

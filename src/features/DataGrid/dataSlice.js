@@ -12,10 +12,11 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getData: builder.query({
       query: () => "/data",
-      providesTags: (result, error, arg) =>
-        result
-          ? [...result.map(({ id }) => ({ type: "RowData", id })), "RowData"]
-          : ["RowData"],
+      providesTags: (result, error, arg) => {
+        return result
+          ? [...result.map(({ _id }) => ({ type: "Item", _id })), "Item"]
+          : ["Item"];
+      },
 
       // transformResponse: (response, meta, arg) => response.data,
     }),

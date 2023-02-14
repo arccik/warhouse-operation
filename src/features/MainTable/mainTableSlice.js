@@ -16,7 +16,15 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: () => [{ type: "Item", _id: "LIST" }],
     }),
+    deleteOneRecord: builder.mutation({
+      query: (id) => ({
+        url: `/maintable/delete?id=${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: () => [{ type: "Item", _id: "LIST" }],
+    }),
   }),
 });
 
-export const { useSubmitDataMutation } = extendedApiSlice;
+export const { useSubmitDataMutation, useDeleteOneRecordMutation } =
+  extendedApiSlice;

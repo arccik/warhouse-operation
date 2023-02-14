@@ -23,11 +23,10 @@ export default function mainTableDTO(item, product, productMAP) {
     scannedLocation: item.stockLocation,
     timeAndDateOfScanning: item.createdAt,
     SAPQuantity: product ? product["Available Stock"] : 0,
-    SAPAddress: product["Storage Unit"] || "",
+    SAPAddress: product["StorageBin"] || "",
     customers: productMAP["Prod Hierarchy Desc"] || "",
-    difference: productMAP?.countedQuantity
-      ? productMAP?.countedQuantity - item.countedQuantity
-      : 0,
+    // difference: item.countedQuantity - (product["Available Stock"] || 0),
+    difference: item.countedQuantity - (product["Available Stock"] || 0),
     MAP: productMAP?.MAP || 0,
     value: productMAP?.MAP ? item.countedQuantity * productMAP?.MAP : 0,
     scannedBy: item.scannedBy,
