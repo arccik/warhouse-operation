@@ -9,12 +9,15 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import PublishIcon from "@mui/icons-material/Publish";
 import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export function MenuListItems({ index, open }) {
   const menuItemsTop = [
@@ -22,6 +25,11 @@ export function MenuListItems({ index, open }) {
       label: "Home",
       icon: <HomeIcon />,
       link: "/",
+    },
+    {
+      label: "Orders",
+      icon: <ShoppingCartIcon />,
+      link: "/add/product",
     },
     {
       label: "Import Data",
@@ -44,7 +52,7 @@ export function MenuListItems({ index, open }) {
   const menuItemLower = [
     {
       label: "User Management",
-      icon: <DisplaySettingsIcon />,
+      icon: <GroupAddIcon />,
       link: "/user-management",
     },
 

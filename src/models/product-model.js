@@ -12,6 +12,8 @@ const ProductSchema = new Schema(
     Type: String,
     "Available Stock": Number,
     StorageBin: String,
+    submitted: { type: Boolean, default: false },
+    scannedBy: { type: Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );

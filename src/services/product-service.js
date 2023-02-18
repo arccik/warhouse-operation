@@ -1,12 +1,18 @@
 import Product from "@/models/product-model";
 
 class ProductService {
-  async get(id) {
+  async get() {
+    const products = await Product.findById();
+    return products;
+  }
+  async getById(id) {
     const products = await Product.findById(id);
     return products;
   }
-  async getAll() {
-    const products = await Product.find();
+  async getAll(page) {
+    const PAGE_LIMIT = 21;
+    const startIndex = Math.abs(Number(page) - 1) * PAGE_LIMIT;
+    const products = await Product.find().limit(PAGE_LIMIT).skip(startIndex);
     return products;
   }
   async update(id, data) {
@@ -23,6 +29,10 @@ class ProductService {
   }
   async addMany(data) {
     const products = await Product.insertMany(data);
+    return products;
+  }
+  async getNotSubmitted() {
+    const products = await Product.find({ submitted: false });
     return products;
   }
 }

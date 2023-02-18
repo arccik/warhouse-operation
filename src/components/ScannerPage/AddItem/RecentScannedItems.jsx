@@ -1,10 +1,10 @@
 import { useGetRecentScannedItemsQuery } from "@/features/Item/itemSlice";
-import { Button, Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { useMemo, useState } from "react";
-import ErrorHandler from "../resources/ErrorHandler/ErrorHandler";
-import Loader from "../resources/Loader/Loader";
+import ErrorHandler from "../../resources/ErrorHandler/ErrorHandler";
+import Loader from "../../resources/Loader/Loader";
 import dayjs from "dayjs";
 import TableActions from "./TableActions";
 

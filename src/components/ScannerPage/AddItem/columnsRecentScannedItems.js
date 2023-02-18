@@ -1,4 +1,4 @@
-import UsersActions from "./UsersActions";
+import UsersActions from "../AddProduct/UsersActions";
 import dayjs from "dayjs";
 import TableActions from "./TableActions";
 

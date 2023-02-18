@@ -4,23 +4,23 @@ import { check, validationResult } from "express-validator";
 import productService from "@/services/product-service";
 import dbConnect from "@/utils/dbConnect";
 
-// const validateBody = initMiddleware(
-//   validateMiddleware(
-//     [
-//       check("productId").isString().not().isEmpty(),
-//       check("storageUnit").isString().not().isEmpty(),
-//       check("material").isString().not().isEmpty(),
-//       check("materialDescription").isString().not().isEmpty(),
-//       check("SLOC").isString().not().isEmpty(),
-//       check("specialStock").isBoolean().not().isEmpty(),
-//       check("specialStockNumber").isString().not().isEmpty(),
-//       check("type").isString().not().isEmpty(),
-//       check("availableStock").isNumeric().not().isEmpty(),
-//       check("storageBin").isString().not().isEmpty(),
-//     ],
-//     validationResult
-//   )
-// );
+export const validateBody = initMiddleware(
+  validateMiddleware(
+    [
+      check("Storage Unit").isString(),
+      check("Material").isString(),
+      check("Material Description").isString(),
+      check("SLOC").isString(),
+      check("Special Stock").isBoolean(),
+      check("Special Stock Number").isString(),
+      check("Type").isString(),
+      check("Available Stock").isNumeric(),
+      check("StorageBin").isString(),
+      check("scannedBy").isMongoId(),
+    ],
+    validationResult
+  )
+);
 
 export default async (req, res) => {
   dbConnect();
@@ -33,7 +33,6 @@ export default async (req, res) => {
         return res.status(422).json({ errors: errors.array() });
       }
 
-      console.log("Product Add tO DB <<< ", req.body);
       const data = await productService.add(req.body);
       res.status(200).json({ status: "ok", data });
       break;

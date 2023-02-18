@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     dbConnect();
     const id = req.query?.id;
     if (id && id.match(/^[0-9a-fA-F]{24}$/)) {
-      const mapProduct = await mapProductService.get(id);
+      const mapProduct = await mapProductService.getById(id);
       if (!mapProduct) {
         return res.status(404).json({
           status: "bad",

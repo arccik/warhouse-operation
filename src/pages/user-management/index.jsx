@@ -9,6 +9,7 @@ import { useState } from "react";
 import AppContainer from "@/components/AppContainer/ApplicationContainer";
 import AddUser from "@/components/UserManagement/AddUser";
 import UserList from "../../components/UserManagement/UserList";
+import UserActivities from "@/components/UserManagement/UserActivities";
 
 export default function UsersManagementPage() {
   const [value, setValue] = useState("2");
@@ -35,7 +36,9 @@ export default function UsersManagementPage() {
           <TabPanel value="2">
             <UserList />
           </TabPanel>
-          <TabPanel value="3">Item Three</TabPanel>
+          <TabPanel value="3">
+            <UserActivities />
+          </TabPanel>
         </TabContext>
       </Box>
     </AppContainer>

@@ -1,24 +1,23 @@
-import { useGetProductsQuery } from "@/features/Product/productSlice"
+import { useGetNotSubmittedProductsQuery } from "@/features/Product/productSlice";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
-import Loader from "../resources/Loader/Loader";
+import Loader from "../../resources/Loader/Loader";
+import dayjs from "dayjs";
 // import columns from "./columns";
 import UsersActions from "./UsersActions";
 
 const PreSubmitTable = () => {
-  const [pageSize, setPageSize] = useState(5);
+  const [pageNumber, setPageNumber] = useState(1);
   const [rowId, setRowId] = useState(null);
-  const { data: rows, isLoading, error } = useGetProductsQuery();
+  const {
+    data: rows,
+    isLoading,
+    error,
+  } = useGetNotSubmittedProductsQuery(pageNumber);
 
   const columns = [
     {
-      field: "ProductId",
-      headerName: "Product ID",
-      width: 110,
-      sortable: false,
-    },
-    {
-      field: "StorageUnit",
+      field: "Storage Unit",
       headerName: "Storage unit",
       width: 150,
       editable: true,
@@ -30,7 +29,7 @@ const PreSubmitTable = () => {
       editable: true,
     },
     {
-      field: "MaterialDescription",
+      field: "Material Description",
       headerName: "Material code SAP",
       type: "string",
       width: 150,
@@ -44,14 +43,14 @@ const PreSubmitTable = () => {
       editable: true,
     },
     {
-      field: "SpecialStock",
+      field: "Special Stock",
       headerName: "Special Stock",
       type: "boolean",
       width: 120,
       editable: true,
     },
     {
-      field: "SpecialStockNumber",
+      field: "Special Stock Number",
       headerName: "Special Stock Number",
       type: "number",
       width: 150,
@@ -64,11 +63,18 @@ const PreSubmitTable = () => {
       // width: 160,
     },
     {
-      field: "AvailableStock",
+      field: "Available Stock",
       headerName: "Available Stock",
       // width: 150,
       editable: true,
       // renderCell: (params) => {}
+    },
+    {
+      field: "createdAt",
+      headerName: "Created Date",
+      width: 150,
+      editable: true,
+      renderCell: (params) => dayjs(params.value).format("HH:MM:ss DD MMM"),
     },
     {
       field: "StorageBin",
@@ -79,6 +85,7 @@ const PreSubmitTable = () => {
     {
       field: "Actions",
       headerName: "User Actions",
+      width: 200,
       type: "actions",
       renderCell: (params) => <UsersActions {...{ params, rowId, setRowId }} />,
     },
@@ -92,9 +99,9 @@ const PreSubmitTable = () => {
       columns={columns}
       rowHeight={60}
       getRowId={(v) => v._id}
-      pageSize={pageSize}
-      onPageSizeChange={(newNumber) => setPageSize(newNumber)}
-      rowsPerPageOptions={[5, 10, 20]}
+      autoPageSize
+      onScroll={(sc) => console.log("scorlll", sc)}
+      onFilterModelChange={(a, b) => console.log("onFilterModelChange", a, b)}
       GridActionsCell
       checkboxSelection
       disableSelectionOnClick
@@ -104,4 +111,4 @@ const PreSubmitTable = () => {
   );
 };
 
-export default PreSubmitTable
+export default PreSubmitTable;

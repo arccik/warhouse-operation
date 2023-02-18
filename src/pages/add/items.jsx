@@ -1,6 +1,6 @@
 import AppContainer from "@/components/AppContainer/ApplicationContainer";
-import AddItems from "@/components/ScannerPage/AddItems";
-import RecentScannedItems from "@/components/ScannerPage/RecentScannedItems";
+import AddItems from "@/components/ScannerPage/AddItem/AddItems";
+import RecentScannedItems from "@/components/ScannerPage/AddItem/RecentScannedItems";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useSubmitDataMutation } from "@/features/MainTable/mainTableSlice";

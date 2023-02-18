@@ -12,6 +12,7 @@ import { LineChart } from "@/components/Charts/LineChart";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import BarChart from "@/components/Charts/BarChart";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -30,25 +31,23 @@ const HomePage = () => {
 
   return (
     <AppContainer>
-      <Typography variant="h3" component="h2">
-        Inventory Analytics
-      </Typography>
+      <Typography variant="h2">Inventory Analytics</Typography>
       <Grid container spacing={4} mt={3}>
-        <Grid item xs={12} md={4}>
-          <Item>
-            <CircleChart />
-          </Item>
-        </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={6}>
           <Item>
             <LineChart />
           </Item>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={6}>
           <Item>
-            <CircleChart />
+            <BarChart />
           </Item>
         </Grid>
+      </Grid>
+      <Grid item xs={4} md={4}>
+        <Item>
+          <CircleChart />
+        </Item>
       </Grid>
     </AppContainer>
   );

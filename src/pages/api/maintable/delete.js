@@ -1,13 +1,9 @@
 // import initMiddleware from "../../../lib/init-middleware";
 // import validateMiddleware from "../../../lib/validate-middleware";
 import { check, validationResult } from "express-validator";
-// import palletService from "@/services/pallet-service";
 import dbConnect from "@/utils/dbConnect";
 import mainTableService from "@/services/mainTable-service";
-import Item from "@/models/item-model";
-import MapProduct from "@/models/map-product-model";
-import Product from "@/models/product-model";
-import mainTableDTO from "@/lib/mainTableDTO";
+
 
 export default async (req, res) => {
   dbConnect();

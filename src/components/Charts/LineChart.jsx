@@ -21,15 +21,15 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
+const options = {
   responsive: true,
   plugins: {
     legend: {
       position: "top",
     },
     title: {
-      display: true,
-      text: "Chart.js Line Chart",
+      display: false,
+      text: "Nu Cheto Poloski pohodu",
     },
   },
 };
